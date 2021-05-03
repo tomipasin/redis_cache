@@ -34,5 +34,9 @@ First time the code catch data from API but also store this data in Redis. From 
 ## What I haven't done (yet):
 I've not implemented yet a TTL on this data because we haven't CEP changes so easely but it's possible define for how long the data will be stored on cache (very useful with data that changes a lot.)   
 
-## Which pachages I've use:
-[redis npm](https://www.npmjs.com/package/redis)
+## Which packages I've used:
+* [redis npm](https://www.npmjs.com/package/redis)
+* [axios](https://www.npmjs.com/package/axios)
+* [express](https://www.npmjs.com/package/express)
+
+
