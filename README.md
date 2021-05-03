@@ -8,24 +8,25 @@ First time the code catch data from API but also store this data in Redis. From 
 
 
 ```javascript
+        const client = redis.createClient(redisPort);
+        
         client.get(searchTerm, async (err, cep) => {
             if (err) throw err;
-    
             if (cep) {
                 res.status(200).send({
                     cep: JSON.parse(cep),
-                    message: "Dados do cache!"
+                    message: "Data from cache!"
                 });
-                console.log("Dados do cache!")
+                console.log("Data from cache!")
             }
             else {
                 const cep = await axios.get(`http://viacep.com.br/ws/${searchTerm}/json`);
                 client.setex(searchTerm, 600, JSON.stringify(cep.data));
                 res.status(200).send({
                     cep: cep.data,
-                    message: "Dados da API. Este CEP não estava no cache. Agora estará ;-)"
+                    message: "Data from API. Now this data will be stored on cache. Next time it will be retrieved from there ;-)"
                 });
-                console.log("Dados da API. Este CEP não estava no cache. Agora estará ;-)")
+                console.log("Data from API. Now this data will be stored on cache. Next time it will be retrieved from there ;-)")
             }
         });
 
